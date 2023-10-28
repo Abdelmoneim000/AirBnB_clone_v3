@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """Creating the Route needed for the application"""
 from flask import Flask
 from models import storage
