@@ -20,11 +20,11 @@ def get_status():
 def get_number_of_objects():
     """A route to count the number of every object type"""
     obj = {
-        "amenity": storage.count("amenity"),
-        "city": storage.count("city"),
-        "place": storage.count("place"),
-        "review": storage.count("review"),
-        "states": storage.count("states"),
-        "users": storage.count("users")
+        "amenities": storage.count("Amenity"),
+        "cities": storage.count("City"),
+        "places": storage.count("Place"),
+        "reviews": storage.count("Review"),
+        "states": storage.count("State"),
+        "users": storage.count("User")
     }
     return jsonify(obj)
