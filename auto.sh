@@ -6,19 +6,8 @@ HBNB_MYSQL_HOST=localhost
 HBNB_MYSQL_DB=hbnb_dev_db
 HBNB_API_HOST="0.0.0.0"
 HBNB_API_PORT=5000
-HBNB_TYPE_STORAGE=$2
+HBNB_TYPE_STORAGE=db
 
-# Check if an argument (a script) was provided
-if [ $# -eq 0 ]; then
-  echo "Usage: $0 script_name"
-  exit 1
-fi
-
-# Check if the script exists and is executable
-if [ ! -x "./$1" ]; then
-  echo "Error: Script '$1' is not found or not executable."
-  exit 1
-fi
 
 # Execute the script passed as an argument
-./$1
+python3 -m api.v1.app
