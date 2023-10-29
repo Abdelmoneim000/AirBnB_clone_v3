@@ -28,3 +28,6 @@ def get_number_of_objects():
         "users": storage.count("User")
     }
     return jsonify(obj)
+
+if __name__ == "__main__":
+    pass
