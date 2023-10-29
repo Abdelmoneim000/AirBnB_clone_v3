@@ -15,10 +15,13 @@ def close_storage(exception=None):
     storage.close()
 
 # Custom 404 error handler
+
+
 @app.errorhandler(404)
 def not_found(error):
     """Handle 404 (Not Found) errors."""
     return jsonify({"error": "Not found"}), 404
+
 
 if __name__ == "__main__":
     HBNB_API_HOST = environ.get('HBNB_API_HOST', '0.0.0.0')
