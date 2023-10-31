@@ -3,7 +3,7 @@
 A module to handle the status messages
 """
 from api.v1.views import app_views
-from models import storage
+from models import storage, amenity , state, place, review, city, user
 from flask import jsonify
 
 
@@ -20,12 +20,12 @@ def get_status():
 def get_number_of_objects():
     """A route to count the number of every object type"""
     obj = {
-        "amenities": storage.count("Amenity"),
-        "cities": storage.count("City"),
-        "places": storage.count("Place"),
-        "reviews": storage.count("Review"),
-        "states": storage.count("State"),
-        "users": storage.count("User")
+        "amenities": storage.count(amenity.Amenity),
+        "cities": storage.count(city.City),
+        "places": storage.count(place.Place),
+        "reviews": storage.count(review.Review),
+        "states": storage.count(state.State),
+        "users": storage.count(user.User)
     }
     return jsonify(obj)
 

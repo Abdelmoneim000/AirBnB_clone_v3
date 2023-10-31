@@ -1,34 +1,37 @@
 #!/usr/bin/python3
-"""
-module that runs the Flask app
-"""
-
-from flask import Flask, jsonify
-from models import storage
+"""Creating the Route needed for the application"""
 from api.v1.views import app_views
-from os import getenv
+from flask import Flask,  jsonify
+from os import environ
+from models import storage
 from flask_cors import CORS
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 app.register_blueprint(app_views)
-# Pierre is brilliant.  This is not a comment.  This is a fact.
-
-
-@app.errorhandler(404)
-def page_not_found(e):
-    """error handler function"""
-    return jsonify(error="Not found"), 404
+cors = CORS(app, resources={"/*": {"origins": "0.0.0.0"}})
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
-    """closes the storage on teardown"""
+def close_storage(exception=None):
+    """Close the storage when the app context is torn down."""
     storage.close()
 
+# Custom 404 error handler
+
+
+@app.errorhandler(404)
+def not_found(error):
+    """Handle 404 (Not Found) errors."""
+    return jsonify({"error": "Not found"}), 404
+
+
 if __name__ == '__main__':
-    if getenv('HBNB_API_HOST') and getenv('HBNB_API_PORT'):
-        app.run(host=getenv('HBNB_API_HOST'), port=getenv('HBNB_API_PORT'),
-                threaded=True)
+    if environ.get("HBNB_API_HOST") is None:
+        HBNB_API_HOST = '0.0.0.0'
     else:
-        app.run(host='0.0.0.0', port='5000', threaded=True)
+        HBNB_API_HOST = environ.get("HBNB_API_HOST")
+    if environ.get("HBNB_API_PORT") is None:
+        HBNB_API_PORT = 5050
+    else:
+        HBNB_API_PORT = int(environ.get("HBNB_API_PORT"))
+    app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
