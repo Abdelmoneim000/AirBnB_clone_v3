@@ -12,7 +12,7 @@ from models.place import Place
                  strict_slashes=False)
 def get_place_amenities(place_id):
     """get amenity information for a specified place"""
-    place = storage.get("Place", place_id)
+    place = storage.get(Place, place_id)
     if place is None:
         abort(404)
     amenities = []
