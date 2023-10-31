@@ -12,7 +12,7 @@ from models.state import State
                  strict_slashes=False)
 def get_cities(state_id):
     """get city information for all cities in a specified state"""
-    state = storage.get("State", state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
     cities = []
@@ -25,7 +25,7 @@ def get_cities(state_id):
                  strict_slashes=False)
 def get_city(city_id):
     """get city information for specified city"""
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
     return jsonify(city.to_dict())
@@ -35,7 +35,7 @@ def get_city(city_id):
                  strict_slashes=False)
 def delete_city(city_id):
     """deletes a city based on its city_id"""
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
     city.delete()
@@ -47,7 +47,7 @@ def delete_city(city_id):
                  strict_slashes=False)
 def post_city(state_id):
     """create a new city"""
-    state = storage.get("State", state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
     if not request.get_json():
@@ -65,7 +65,7 @@ def post_city(state_id):
                  strict_slashes=False)
 def put_city(city_id):
     """update a city"""
-    city = storage.get("City", city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
     if not request.get_json():
