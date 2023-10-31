@@ -13,7 +13,7 @@ def get_status():
     response = {
         "status": "OK"
         }
-    return response
+    return jsonify(response)
 
 
 @app_views.route('/stats', methods=['GET'])
@@ -27,7 +27,7 @@ def get_number_of_objects():
         "states": storage.count("State"),
         "users": storage.count("User")
     }
-    return obj
+    return jsonify(obj)
 
 if __name__ == "__main__":
     pass
