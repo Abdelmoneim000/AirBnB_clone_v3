@@ -1,2 +1,3 @@
 setup_mysql_dev.sql
 auto.sh
+tests.py

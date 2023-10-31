@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 cors = CORS(app, resources={"/*": {"origins": "0.0.0.0"}})
 
+
 @app.teardown_appcontext
 def close_storage(exception=None):
     """Close the storage when the app context is torn down."""
@@ -26,5 +27,5 @@ def not_found(error):
 
 if __name__ == "__main__":
     HBNB_API_HOST = environ.get('HBNB_API_HOST', '0.0.0.0')
-    HBNB_API_PORT = int(environ.get('HBNB_API_PORT', 5000))
+    HBNB_API_PORT = int(environ.get('HBNB_API_PORT', 5050))
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
